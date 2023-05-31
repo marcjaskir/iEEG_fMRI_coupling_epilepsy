@@ -277,14 +277,17 @@ def main():
             # Save compiled ROIs for visualization
             spherical_rois_reference_img = nib.Nifti1Image(spherical_rois_reference_wm[radius], affine=bold_ref.affine)
             nib.save(spherical_rois_reference_img, ospj(out_paths['masks'], sub + '_wm_electrode_masks_radius-' + str(radius) + 'mm.nii.gz'))
-        
+
             # Save averaged BOLD timeseries
-            np.savetxt(ospj(out_paths['raw'], sub + '_wm_bold_timeseries_radius-' + str(radius) + 'mm.csv'), bold_timeseries_wm[radius], delimiter=',')
+            #np.savetxt(ospj(out_paths['raw'], sub + '_wm_bold_timeseries_radius-' + str(radius) + 'mm.csv'), bold_timeseries_wm[radius], delimiter=',')
 
             # Create correlation matrix from averaged BOLD timeseries
             bold_timeseries_df = pd.DataFrame(bold_timeseries_wm[radius], columns=labels_wm)
             bold_timeseries_df = bold_timeseries_df.filter(ieeg_connectivity_wm_labels)
             
+            # Save averaged BOLD timeseries
+            bold_timeseries_df.to_csv(ospj(out_paths['raw'], sub + '_wm_bold_timeseries_radius-' + str(radius) + 'mm.csv'), index=False)
+
             # Create correlation matrix
             bold_timeseries_conn_pearson = bold_timeseries_df.corr(method='pearson')
             bold_timeseries_conn_spearman = bold_timeseries_df.corr(method='spearman')
@@ -412,11 +415,14 @@ def main():
             nib.save(spherical_rois_reference_img, ospj(out_paths['masks'], sub + '_gm_electrode_masks_radius-' + str(radius) + 'mm.nii.gz'))
 
             # Save averaged BOLD timeseries
-            np.savetxt(ospj(out_paths['raw'], sub + '_gm_bold_timeseries_radius-' + str(radius) + 'mm.csv'), bold_timeseries_gm[radius], delimiter=',')
+            #np.savetxt(ospj(out_paths['raw'], sub + '_gm_bold_timeseries_radius-' + str(radius) + 'mm.csv'), bold_timeseries_gm[radius], delimiter=',')
 
             # Create correlation matrix from averaged BOLD timeseries
             bold_timeseries_df = pd.DataFrame(bold_timeseries_gm[radius], columns=labels_gm)
             bold_timeseries_df = bold_timeseries_df.filter(ieeg_connectivity_gm_labels)
+
+            # Save averaged BOLD timeseries
+            bold_timeseries_df.to_csv(ospj(out_paths['raw'], sub + '_gm_bold_timeseries_radius-' + str(radius) + 'mm.csv'), index=False)
 
             # Create correlation matrix
             bold_timeseries_conn_pearson = bold_timeseries_df.corr(method='pearson')
