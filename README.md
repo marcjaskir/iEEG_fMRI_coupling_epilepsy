@@ -1,7 +1,7 @@
 ## Characterizing iEEG-fMRI coupling in epilepsy patients
 
 ### Description
-
+Using resting state fMRI and interictal, preictal, and ictal iEEG data from 32 epilepsy patients, we evaluated differences in average iEEG-fMRI correlations and the associations between their graph theoretic properties (global efficiency) across different tissue types, seizure states, and frequency bands. We also used dynamic functional connectivity to elucidate seizure state-specific changes in iEEG-fMRI coupling over time.
 
 ### Faculty Lead
 Kathryn Davis
